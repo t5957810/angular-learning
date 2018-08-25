@@ -1,0 +1,85 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* 漢堡menu 樣式 */
+.hamburger.mat-button {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  transition-duration: .4s;
+}
+/* header 樣式 */
+mat-toolbar-row{
+  background: #455A64;
+  color: #fff;
+  padding: 0; /* 讓漢堡menu左側不會有多的距離 */
+}
+
+/* LOGO */
+.nav-link.home {
+  cursor: pointer;
+  margin: 0 16px 0 0;
+  padding: 21px 0;
+}
+
+/* header 中間的空白 */
+.example-spacer {
+  flex: 1 1 auto;
+}
+/* header 連結樣式 */
+mat-toolbar-row a.nav-link {
+  margin: 0;
+  padding: 15px;
+  cursor: pointer;
+  color: #fff;
+  text-decoration:none;
+}
+@media (max-width: 599px){
+  mat-toolbar-row a.nav-link {
+      height: 56px;
+      padding:10px;
+  }
+}
+
+/* 左側選單樣式 */
+mat-sidenav{
+  position: fixed;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  min-width: 200px;
+  box-shadow: 6px 0 6px rgba(0,0,0,.1);
+}
+.sidenav-content {
+  min-height: 100vh;
+    padding: 5px 2rem 1rem;
+}
+
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
+}
+
+/* 網頁大小時改成只有內容scrollbar */
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+/* 手機大小時改成全版scrollbar */
+.example-is-mobile .example-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+     `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
+}

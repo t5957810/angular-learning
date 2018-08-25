@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+body,html {
+  margin: 0;
+  height: 100%;
+  font-family: Microsoft JhengHei, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+
+[no-margin]{
+  margin: 0px;
+}
+[margin]{
+  margin: 16px;
+}
+[margin-top]{
+  margin-top: 16px;
+}
+[margin-bottom]{
+  margin-bottom: 16px;
+}
+[margin-right]{
+  margin-right: 5px !important;
+}
+[margin-left]{
+  margin-left: 5px !important;
+}
+[padding]{
+  padding: 16px;
+}
+[no-padding]{
+  padding: 0;
+}
+[full-width] {
+  width:100%;
+}
+
+[text-center] {
+  text-align:center;
+}
+[red]{
+  color:red;
+}
+[responsive-img]{
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+}
+
+[microsoft-font], pre {
+  font-family: Microsoft JhengHei !important;
+}
+
+.mat-cell{
+  font-size: 15px;
+  font-family: Microsoft JhengHei !important;
+}
+.mat-header-cell {
+  font-size: 17px;
+  font-family: Microsoft JhengHei !important;
+  font-weight: bold;
+}

@@ -1,0 +1,111 @@
+<h2>ES6變數與常數</h2>
+<ul>
+    <li>
+      <h3>使用let宣告變數</h3>
+      <ul>
+        <li>屬於block scope，且同一範圍不允許重複宣告變數。</li>
+        <li>使用var宣告過的變數，不能再用let宣告一次。</li>
+        <li><p>用let宣告變數之後才能開始使用(也有hoisting特性)。</p>
+          <h4>hoisting：變數、函式在宣告期間就會先建立一個記憶體空間，等到實際運行時再將值放入到該記憶體空間內。</h4>
+          <p>例如直接執行 console.log(phone); 此時會跳出錯誤表示phone尚未被定義過。</p>
+          <p>但是如果執行</p>
+              <pre>
+              console.log(phone);
+              var phone = 'myphone';
+              </pre>
+          <p>這個時候並不會出錯，而是跳出undefined</p>
+
+          <h4>function hoisting特性：</h4>
+          <p>當function使用function expression(函式陳述式)方法宣告時，hoisting特性與變數宣告類似。</p>
+          <p>例如直接執行以下程式會跳callSomeone is not a function的錯誤：</p>
+              <pre>
+                callSomeone('咖尼馬');
+                var callSomeone = function (name) {{'{'}}
+                  console.log('打給 ' + name)
+                {{ '}' }}
+              </pre>
+            <p>但是使用function declaration(函式運算式)方法宣告時則不會出錯，相當於整個function放在最前方：</p>
+            <pre>
+                callSomeone('咖尼馬');
+                function callSomeone(name) {{'{'}}
+                  console.log('打給 ' + name)
+                {{ '}' }}
+            </pre>
+          </li>
+      </ul>
+    </li>
+    <li>
+        <h3>使用const宣告變數</h3>
+        <ul>
+            <li>宣告一個唯讀變數，變數無法指向其他物件。</li>
+            <li>雖然參考值不能改，但可以被擴增屬性。</li>
+            <li>宣告完後必須初始化變數，給定預設值。</li>
+            <li>其餘特性與let相同。</li>
+        </ul>
+    </li>
+  </ul>
+<h2>JavaScript與Typescript型別分類</h2>
+<table style="width: 100%;" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef> 型別種類 </th>
+        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="js_description">
+        <th mat-header-cell *matHeaderCellDef> JavaScript </th>
+        <td mat-cell *matCellDef="let element"> {{element.js_description}} </td>
+      </ng-container>
+
+      <!-- ts_description Column -->
+      <ng-container matColumnDef="ts_description">
+        <th mat-header-cell *matHeaderCellDef> Typescript </th>
+        <td mat-cell *matCellDef="let element"> {{element.ts_description}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<h3>void型別：</h3><p>通常只會用在function的回傳值，如果將變數設定為void型別，該變數就只能存null或undefined</p>
+<h3>型別轉換：</h3>
+<pre>
+  let a: any = "this is a string";
+  let strLength: number = (a as string).length;
+</pre>
+<h2>Typescript Interface：</h2>
+<pre>
+  interface Action {{ '{' }}
+    type: string;
+    value?: number;          // 透過?可以設定屬性為非必要屬性
+    [propName: string]: any; // 允許任意屬性傳入
+  {{'}'}}
+
+  宣告變數型別為interface使用:
+  let test: Action = {{ '{' }}{{'}'}};
+</pre>
+<p red>interface編譯成JavaScript時不會產生程式碼!</p>
+
+<h2>Typescript Class</h2>
+<pre>
+    class Greeter {{ '{' }}
+      greeting: string;       // 預設為公開屬性
+      private title?: string; // 宣告為私有屬性
+      constructor(message:string, title:string) {{ '{' }}
+          this.greeting = message;
+          this.title = title;
+      {{'}'}}
+      greet(){{ '{' }}
+        return '你好!, ' + this.greeting;
+      {{'}'}}
+    {{'}'}}
+
+    產生class:
+    let test = new Greeter('Hello World', 'Edward');
+  </pre>
+
+<h2>泛型</h2>
+<pre>function indentity{{'<'}}T{{'>'}}(arg: T): T {{ '{' }}
+      return arg;
+  {{'}'}}
+</pre>
+<p>呼叫泛型函式(明確指定使用字串型別)：</p>
+<pre>let output = indentity{{'<'}}string{{'>'}}("myString");</pre>

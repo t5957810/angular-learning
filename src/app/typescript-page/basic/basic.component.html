@@ -1,0 +1,96 @@
+<h2>什麼是Typescript?</h2>
+<p>
+  在<span red>「開發時期」</span>宣告型別的JavaScript超集合，<span red>最終會被編譯成JavaScript。</span>。
+</p>
+<img responsive-img src="assets/images/typescript/t1.png" />
+<p>
+    JavaScript語法就是合法的Typescript，就如同你可以在SCSS裡寫CSS3一樣，只是通常我們會裝TSLint風格檢查，
+    所以有些JavaScript寫法會在Visual Studio Code被檢查出來，但不影響程式運作。
+</p>
+
+<h2>開發環境</h2>
+<ul>
+  <li>
+    <p>安裝：npm install -g typescript</p>
+  </li>
+  <li><p>查看版本：tsc -v</p></li>
+  <li><p>查看執行檔位於哪個目錄：where tsc</p></li>
+  <li>
+    <p>查詢目前已安裝的npm模組：npm ls -g --depth=0</p>
+    <img responsive-img src="assets/images/typescript/t2.png" />
+  </li>
+</ul>
+
+  <h3>Windows 下的npm常見問題</h3>
+  <ul>
+    <li>
+      <p>無法安裝套件：清除所有快取套件 -> npm cache clean</p>
+    </li>
+    <li><p>無法編譯套件：變更執行環境設定的Visual Studio Code版本 ->  npm install --global --production windows-build-tools</p></li>
+    <li>
+      <p>版本控管git的注意事項：要排除node_modules資料夾，不然檔案會太大</p>
+    </li>
+  </ul>
+<h2>認識tsconfig.json</h2>
+<ul>
+    <li>
+      <p>compilerOptions：告知typescript編譯器該如何編譯你的專案。</p>
+    </li>
+    <li>
+        <p>files：預設typescript會找出專案目錄下所有*.ts和*tsx檔案出來編譯，如果有設定files，就只會找指定檔案進行編譯。</p>
+    </li>
+    <li>
+        <p>exclude：如果有設定exclude，編譯時就會排除指定的檔案。</p>
+        <p><span red>注意</span>：exclude與files不能同時設定(files會優先)</p>
+    </li>
+    <li>
+        <p>compileOnSave：Visual Studio Code自動監視專案*.ts檔案儲存時自動編譯。</p>
+    </li>
+</ul>
+<h2>認識模組定義檔 *.d.ts</h2>
+<ul>
+    <li>
+      <p>因為typescript最終會編譯成js檔，而許多外部模組本身都是用js寫的(例如jQuery)，因此typescript無法辨識這些js函式庫中的型別。</p>
+    </li>
+    <li>
+        <p>模組定義檔 *.d.ts 是用typescript寫的，用來描述現有js函式庫有哪些屬性與方法，通常是用interface寫的。</p>
+    </li>
+</ul>
+<h2>如何安裝模組定義檔</h2>
+<ul>
+    <li>
+      <p>搜尋模組定義檔：<a href="http://microsoft.github.io/TypeSearch/" target="_blank">http://microsoft.github.io/TypeSearch/</a>，
+      找到之後透過npm安裝
+      </p>
+    </li>
+    <li>
+      <p>在tsconfig.json指定模組定義檔基底路徑：</p>
+      <pre>
+        "typeRoots": [
+          "node_modules/@types"
+        ],
+      </pre>
+    </li>
+</ul>
+<h2>在Angular裡使用jQuery</h2>
+<p>先安裝jQuery的模組定義檔：npm i --save @types/jquery</p>
+<p>在tsconfig.json的compilerOptions新增types屬性：</p>
+<pre>
+      "typeRoots": [
+        "node_modules/@types"
+      ],
+      "types": [
+        "jquery"
+      ]
+</pre>
+<p>最後在index.html裡新增script的連結。</p>
+<p>從npm上下載jQuery(建議作法)：npm install --save jquery</p>
+<img responsive-img src="assets/images/typescript/t3.png" />
+<p>如果jquery是外部的檔案，請將js檔案放在assets下方便管理</p>
+<img responsive-img src="assets/images/typescript/t4.png" />
+<p>上面兩個步驟設定完後就可以在Component中使用jQuery語法了，
+  而且不用宣告declare var $: any或import * from 'jquery'(在@types/jquery已經宣告好了)。</p>
+<p>直接在ts中測試使用，typescript可以認得$：</p>
+  <img responsive-img src="assets/images/typescript/t5.png" />
+<p>按下F12查看console結果</p>
+<img responsive-img src="assets/images/typescript/t6.png" />

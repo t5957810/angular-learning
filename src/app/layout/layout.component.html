@@ -1,0 +1,66 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
+    <mat-toolbar color="primary" class="example-toolbar">
+      <mat-toolbar-row>
+          <button class="hamburger mat-button" mat-button="" (click)="snav.toggle()">
+            <span class="mat-button-wrapper">
+            <mat-icon class="mat-icon" >
+            menu
+            </mat-icon></span>
+            <div class="mat-button-ripple mat-ripple" matripple=""></div>
+            <div class="mat-button-focus-overlay"></div>
+          </button>
+          <a class="nav-link home" [routerLink]="['/']">
+            <img alt="Home" height="40" src="assets/images/logos/logo-nav@2x.png" title="Home" width="150" class="ng-star-inserted">
+          </a>
+          <h1 class="example-app-name">Angular Learning</h1>
+          <span class="example-spacer"></span>
+
+          <a mat-button class="hamburger nav-link" [matMenuTriggerFor]="menu"  microsoft-font>
+            <span  class="mat-button-wrapper">
+                回登入頁面</span>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['/login']">登出</button>
+              </mat-menu>
+          </a>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0" >
+
+        <!-- 左側選單 -->
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+        opened="true"   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+
+            <mat-nav-list style="padding-top:0px;">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Typescript
+                            </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <a mat-list-item microsoft-font [routerLink]="['/typescript/basic']" >基本觀念與開發環境</a>
+                    <a mat-list-item microsoft-font [routerLink]="['/typescript/feature']" >語言特性</a>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Angular
+                            </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <a mat-list-item microsoft-font [routerLink]="['/angular/cli']" >Angular CLI</a>
+                    <a mat-list-item microsoft-font [routerLink]="['/angular/basic']" >基本架構介紹</a>
+                </mat-expansion-panel>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <!-- 右側內容 -->
+        <mat-sidenav-content>
+            <section class="sidenav-content" >
+                <router-outlet></router-outlet>
+            </section>
+            <app-footer></app-footer>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+
+</div>
+
