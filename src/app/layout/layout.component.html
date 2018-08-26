@@ -12,7 +12,7 @@
           <a class="nav-link home" [routerLink]="['/']">
             <img alt="Home" height="40" src="assets/images/logos/logo-nav@2x.png" title="Home" width="150" class="ng-star-inserted">
           </a>
-          <h1 class="example-app-name">Angular Learning</h1>
+          <h1 class="example-app-name">Learning</h1>
           <span class="example-spacer"></span>
 
           <a mat-button class="hamburger nav-link" [matMenuTriggerFor]="menu"  microsoft-font>
@@ -26,10 +26,10 @@
     </mat-toolbar>
 
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0" >
-
+        {{ mobileQuery.matches }}
         <!-- 左側選單 -->
         <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-        opened="true"   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+          [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
 
             <mat-nav-list style="padding-top:0px;">
                 <mat-expansion-panel>
@@ -58,6 +58,7 @@
             <section class="sidenav-content" >
                 <router-outlet></router-outlet>
             </section>
+            <!-- <button mat-flat-button color="warn" (click)="goTop()" #gotop>Warn</button> -->
             <app-footer></app-footer>
         </mat-sidenav-content>
     </mat-sidenav-container>

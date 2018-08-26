@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../environments/environment';
 
 export interface PeriodicElement {
   use?: string;
@@ -30,7 +29,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class AngularCLIComponent implements OnInit {
   displayedColumns: string[] = ['use', 'cli'];
   dataSource = ELEMENT_DATA;
-  environmentName = environment.envName;
+
 
   constructor() { }
 

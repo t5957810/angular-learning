@@ -4,7 +4,102 @@
     <li><p>src/style.css：預設全站共用的css</p></li>
     <li><p>src/main.ts：Angular啟動時程式進入點</p></li>
     <li><p>src/polyfills.ts：瀏覽器相容設定，IE預設不支援Angular，要去打開註解IE才能正確運行。</p></li>
-
+    <li><p>src/assets：網站相關的靜態檔案資源(如css, images, js..)。</p></li>
+    <hr>
+    <h4>應用程式原始碼</h4>
+    <li><p>src/app/app.module.ts：應用程式的全域模組。</p></li>
+    <li><p>src/app/app.component.ts：根元件主程式。</p></li>
+    <li><p>src/app/app.component.html：根元件模板。</p></li>
+    <li><p>src/app/app.component.css：根元件模板的css。</p></li>
+    <li><p>src/app/app.component.spec.ts：根元件單元測試程式。</p></li>
+    <hr>
+    <h4>共用的環境變數</h4>
+    <li><p>src/environments/environment.ts：預設的環境變數設定。</p></li>
+    <li><p>src/environments/environment.prod.ts：正式產品環境設定(ng build --env=prod)。</p></li>
+    <h4>如何新增環境變數?</h4>
+    <p>例如要新增一個uat環境，在environments資料夾下新增environment.uat.ts，</p>
+    <p>然後在angular.json中build找到configurations，加上：</p>
+    <pre>
+        "uat": {{'{'}}
+          "fileReplacements": [
+          {{'{'}}
+              "replace": "src/environments/environment.ts",
+              "with": "src/environments/environment.uat.ts"
+          {{'}'}}
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": true,
+          "extractCss": true,
+          "namedChunks": false,
+          "aot": true,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true
+      {{'}'}}
+    </pre>
+    <p>在angular.json中serve底下的configurations也要新增：</p>
+    <pre>
+        "uat": {{'{'}}
+          "browserTarget": "angular-learning:build:uat"
+          {{'}'}}
+    </pre>
+    <p>目前環境變數：{{ environmentName }}</p>
+    <hr>
+    <img style="max-width: 850px;" responsive-img src="assets/images/angular-basic/a1.png" />
+    <h3>app.module介紹：</h3>
+    <img style="max-width: 850px;" responsive-img src="assets/images/angular-basic/a2.png" />
+    <h3>app.component介紹：</h3>
+    <img style="max-width: 850px;" responsive-img src="assets/images/angular-basic/a3.png" />
   </ul>
 
+<h2>資料繫結的四種方法</h2>
+<ul>
+  <li>
+    <p>內嵌繫結(interpolation)：</p>
+    <p>{{ '{' }}{{ '{' }} property {{ '}' }}{{ '}' }}</p>
+  </li>
+  <li>
+    <p>屬性繫結(property binding)：</p>
+    <p>[property-name] = "statement"</p>
+    <p> property-name = "expression"</p>
+  </li>
+  <li>
+    <p>事件繫結(event binding)：</p>
+    <p> (eventName) = "method($event)"</p>
+  </li>
+  <li>
+    <p>雙向繫結(two-way binding)：</p>
+    <p>[(ngModel)]="property"</p>
+  </li>
+</ul>
 
+<h2>範本參考變數(template reference variables)</h2>
+<p>在html上使用 #name語法，會在該template上建立名為name的區域變數，且該變數會儲存該標籤上的DOM物件。</p>
+<p>可以透過事件繫結將DOM物件的屬性傳回component的ts中。</p>
+
+<h2>三種Angular 指令(directives)</h2>
+<ul>
+    <li>
+      <p>元件型指令(component directives)：</p>
+      <p>例如：< app-xxx >< /app-xxx>  </p>
+    </li>
+    <li>
+      <p>屬性型指令(attribute directives)：</p>
+      <p>這種指令會修改元素的外觀或行為。</p>
+      <p> 例如：ngStyle, ngClass。</p>
+    </li>
+    <li>
+      <p>結構型指令(structural directives)：</p>
+      <p>這種指令會透過新增和刪除DOM元素來改變DOM結構。</p>
+      <p> 例如：ngIf, ngFor, ngSwitch。</p>
+      <p> ngSwitch前面不加*星號。</p>
+    </li>
+  </ul>
+<h2>Angular component之間的溝通方式</h2>
+<h4>父Component 傳資料給子Component</h4>
+<p>傳入屬性，兒子接值的ts用@input</p>
+< app-兒子 [data]="父的data">
+<p>兒子ts:
+@Input() data;</p>
+<app-angular-detail></app-angular-detail>

@@ -73,7 +73,8 @@
     </li>
 </ul>
 <h2>在Angular裡使用jQuery</h2>
-<p>先安裝jQuery的模組定義檔：npm i --save @types/jquery</p>
+<p>先安裝jQuery的模組定義檔，讓你在開發階段不會一直出現不認得$的錯誤：npm i --save @types/jquery</p>
+<p red>請注意，安裝模組定義檔並不會幫你安裝jQuery</p>
 <p>在tsconfig.json的compilerOptions新增types屬性：</p>
 <pre>
       "typeRoots": [
@@ -83,13 +84,24 @@
         "jquery"
       ]
 </pre>
-<p>最後在index.html裡新增script的連結。</p>
-<p>從npm上下載jQuery(建議作法)：npm install --save jquery</p>
-<img responsive-img src="assets/images/typescript/t3.png" />
-<p>如果jquery是外部的檔案，請將js檔案放在assets下方便管理</p>
+<h3>載入jQuery的方法：</h3>
+<h4>方法1</h4>
+<p>如果是在index.html裡新增script的連結，不可使用node_modules路徑，請將js檔案放在assets下方便管理</p>
 <img responsive-img src="assets/images/typescript/t4.png" />
-<p>上面兩個步驟設定完後就可以在Component中使用jQuery語法了，
-  而且不用宣告declare var $: any或import * from 'jquery'(在@types/jquery已經宣告好了)。</p>
+<hr>
+<h4>方法2</h4>
+<p>不想在index裡加連結的話可以到angular.json裡的scripts新增相對路徑</p>
+<pre>
+"scripts": [
+  "node_modules/jquery/dist/jquery.min.js"
+]
+</pre>
+<p>方法2的缺點是如果有多個script都加入，最終會打包在同一個script檔裡，讓這隻檔案變很大</p>
+<img responsive-img src="assets/images/typescript/t3.png" />
+<hr>
+<p>上面兩個步驟設定完後就可以直接在ts中使用jQuery語法了，
+  jQuery可以不用宣告declare var $: any或import * from 'jquery'(在@types/jquery已經宣告好了)。</p>
+<p>不過lodash因為特殊符號是使用underscore _，建議還是另外import。</p>
 <p>直接在ts中測試使用，typescript可以認得$：</p>
   <img responsive-img src="assets/images/typescript/t5.png" />
 <p>按下F12查看console結果</p>
