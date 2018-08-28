@@ -84,7 +84,7 @@ mat-sidenav{
   flex: 1 0 auto;
 }
 
-#gotop {
+.gotop {
     position:fixed;
     z-index:90;
     right:30px;

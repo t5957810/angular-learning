@@ -1,0 +1,25 @@
+<h1>Angular 的元件種類</h1>
+<ul>
+  <li>
+      <h4>@Component：</h4><p>含有樣板的指令。</p>
+  </li>
+  <li>
+    <h4>@Directive：</h4><p>與@Component差異在於Directive沒有template，通常用在取得DOM來修改元素外觀或元素。</p>
+  </li>
+  <li>
+      <h4>@Pipe：</h4><p>只能在樣版html使用此元件。</p>
+  </li>
+  <li>
+      <h4>@Injectable：</h4><p>只能在元件ts中使用此元件，任意元件皆可透過DI注入。</p>
+  </li>
+  <li>
+    <h4>@ViewChild</h4>
+    <img style="max-width: 850px;" responsive-img src="assets/images/angular-basic/a8.png" />
+    <br>
+    <button #btn mat-flat-button (click)="getViewChild()" color="warn">使用ViewChild取得這個按鈕</button>
+  </li>
+</ul>
+
+
+
+

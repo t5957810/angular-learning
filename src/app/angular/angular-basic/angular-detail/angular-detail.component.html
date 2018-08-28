@@ -1,3 +1,6 @@
-<p>
-  angular-detail works!
-</p>
+<div  mat-elevation-z8 class="demo" padding shadow>
+    <div class="button-row">
+      <button mat-raised-button color="accent" *ngFor="let item of data" (click)="chooseValue.emit(item)">{{ item.name }}</button>
+    </div>
+</div>
+

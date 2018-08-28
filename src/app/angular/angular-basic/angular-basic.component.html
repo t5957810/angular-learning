@@ -1,3 +1,4 @@
+<div>
 <h2>首頁html與Angular主程式</h2>
 <ul>
     <li><p>src/index.html：預設網站首頁</p></li>
@@ -15,7 +16,7 @@
     <hr>
     <h4>共用的環境變數</h4>
     <li><p>src/environments/environment.ts：預設的環境變數設定。</p></li>
-    <li><p>src/environments/environment.prod.ts：正式產品環境設定(ng build --env=prod)。</p></li>
+    <li><p>src/environments/environment.prod.ts：正式產品環境設定(<span red>Angular 6 使用 ng build -c prod/ Angular 5 以前使用: ng build --env=prod </span>)。</p></li>
     <h4>如何新增環境變數?</h4>
     <p>例如要新增一個uat環境，在environments資料夾下新增environment.uat.ts，</p>
     <p>然後在angular.json中build找到configurations，加上：</p>
@@ -38,7 +39,7 @@
           "buildOptimizer": true
       {{'}'}}
     </pre>
-    <p>在angular.json中serve底下的configurations也要新增：</p>
+    <p>如果想在ng serve啟動時測試，在angular.json中serve底下的configurations也要新增：</p>
     <pre>
         "uat": {{'{'}}
           "browserTarget": "angular-learning:build:uat"
@@ -96,10 +97,71 @@
       <p> ngSwitch前面不加*星號。</p>
     </li>
   </ul>
-<h2>Angular component之間的溝通方式</h2>
+<h2>Angular component之間的溝通方式@Input/@Output</h2>
 <h4>父Component 傳資料給子Component</h4>
 <p>傳入屬性，兒子接值的ts用@input</p>
 < app-兒子 [data]="父的data">
 <p>兒子ts:
 @Input() data;</p>
-<app-angular-detail></app-angular-detail>
+
+<hr>
+<p>Demo：</p>
+<h4>以下藍色部分為兒子app-angular-detail component：</h4>
+<p>將陣列資料傳入在兒子app-angular-detail，使用ngFor跑出資料，點擊按鈕後回傳給父angular-basic選擇的值。</p>
+<app-angular-detail (chooseValue)="doChoose($event)" [data]="fatherArray"></app-angular-detail>
+<h4>兒子app-angular-detail的html(接收來自父的資料，並使用emit將事件發射給父component)：</h4>
+< button mat-raised-button color="accent" *ngFor="let item of data" (click)="chooseValue.emit(item)">  item.name  < /button>
+<h4>兒子app-angular-detail的ts：</h4>
+<pre>
+  @Input() data;
+  @Output() chooseValue = new EventEmitter{{ '<' }}any{{'>'}}();
+
+</pre>
+
+<h4>父angular-basic 的html(將兒子寫上去)：</h4>
+{{ '<' }}app-angular-detail (chooseValue)="doChoose($event)" [data]="fatherArray" {{'>'}}{{ '<' }}/app-angular-detail{{'>'}}
+<h4>父angular-basic 的ts：</h4>
+<pre>
+fatherArray = [
+{{ '{' }}id: 1, name: '園丁'{{ '}' }},
+{{ '{' }}id: 2, name: '律師'{{ '}' }},
+{{ '{' }}id: 3, name: '祭司'{{ '}' }},
+{{ '{' }}id: 4, name: '盲女'{{ '}' }},
+{{ '{' }}id: 5, name: '前鋒'{{ '}' }},
+{{ '{' }}id: 6, name: '傭兵'{{ '}' }},
+{{ '{' }}id: 7, name: '空軍'{{ '}' }},
+{{ '{' }}id: 8, name: '魔術師'{{ '}' }},
+{{ '{' }}id: 9, name: '冒險家'{{ '}' }},
+{{ '{' }}id: 10, name: '機械師'{{ '}' }},
+{{ '{' }}id: 11, name: '慈善家'{{ '}' }},
+{{ '{' }}id: 12, name: '醫生'{{ '}' }},
+{{ '{' }}id: 13, name: '幸運兒'{{ '}' }}
+];
+
+doChoose($event) {{ '{' }}
+  this.openSnackBar($event.name);
+{{ '}' }}
+</pre>
+
+<h1>生命週期</h1>
+<img style="max-width: 850px;" responsive-img src="assets/images/angular-basic/a4.png" />
+<img style="max-width: 850px;" responsive-img src="assets/images/angular-basic/a5.png" />
+<img style="max-width: 850px;" responsive-img src="assets/images/angular-basic/a6.png" />
+<p>以上面子元件和父元件做例子：</p>
+<p>AngularBasicComponent 父元件發生ngOnInit</p>
+<p>AngularBasicComponent 父元件發生ngAfterContentInit</p>
+<p>AngularDetailComponent 子元件發生ngOnInit</p>
+<p>AngularDetailComponent 子元件發生ngAfterContentInit</p>
+<p>AngularDetailComponent 子元件發生ngAfterViewInit</p>
+<p>如果兒子裡面還有兒子，就會繼續孫子的ngOnInit和ngAfterViewInit下去....</p>
+<p>AngularBasicComponent 父元件發生ngAfterViewInit</p>
+
+<h1>封裝樣式 View Encapsulation</h1>
+<ul>
+  <li><p>ViewEncapsulation.None：所有從元件註冊的樣式都會加入整份網頁。</p></li>
+  <li><p>ViewEncapsulation.Emulated(預設)：元件的樣式只套用到該元件的html。</p></li>
+  <li><p>ViewEncapsulation.Native：元件以Shadow DOM 技術將元素網頁封裝Web 元件。</p></li>
+</ul>
+<button mat-raised-button color="primary" >強迫更改按鈕顏色，但只會影響AngularBasicComponent</button>
+<br>
+</div>

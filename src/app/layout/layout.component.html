@@ -49,6 +49,9 @@
                     </mat-expansion-panel-header>
                     <a mat-list-item microsoft-font [routerLink]="['/angular/cli']" >Angular CLI</a>
                     <a mat-list-item microsoft-font [routerLink]="['/angular/basic']" >基本架構介紹</a>
+                    <a mat-list-item microsoft-font [routerLink]="['/angular/advance']" >進階應用介紹</a>
+                    <a mat-list-item microsoft-font [routerLink]="['/angular/dynamicComponent']" >動態載入元件</a>
+                    <a mat-list-item microsoft-font [routerLink]="['/angular/dynamicForms']" >動態載入表單</a>
                 </mat-expansion-panel>
             </mat-nav-list>
         </mat-sidenav>
@@ -58,7 +61,7 @@
             <section class="sidenav-content" >
                 <router-outlet></router-outlet>
             </section>
-            <!-- <button mat-flat-button color="warn" (click)="goTop()" #gotop>Warn</button> -->
+             <!-- <button mat-flat-button color="warn" class="gotop" (click)="goTop()" appGoTop>Warn</button> -->
             <app-footer></app-footer>
         </mat-sidenav-content>
     </mat-sidenav-container>

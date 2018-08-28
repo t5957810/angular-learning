@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule, MatCheckboxModule, MAT_LABEL_GLOBAL_OPTIONS, MatSnackBarModule, MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE } from '@angular/material';
+  MAT_DATE_LOCALE,
+  MatButtonToggleModule} from '@angular/material';
 import {CdkTableModule} from '@angular/cdk/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -43,6 +44,7 @@ export const TW_FORMATS = {
 @NgModule({
   exports: [
     MatButtonModule,
+    MatButtonToggleModule,
     MatCheckboxModule,
     CdkTableModule,
     MatAutocompleteModule,

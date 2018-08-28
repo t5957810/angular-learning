@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { CommonShareModule } from './shared-modules/common-share/common-share.module';
 import { FooterComponent } from './layout/footer/footer.component';
+import { GoTopDirective } from './go-top.directive';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FooterComponent } from './layout/footer/footer.component';
     LayoutComponent,
     LoginComponent,
     NotFoundComponent,
-    FooterComponent
+    FooterComponent,
+    GoTopDirective
   ],
   imports: [
     BrowserModule,

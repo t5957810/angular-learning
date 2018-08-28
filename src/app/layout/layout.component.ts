@@ -24,6 +24,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   }
 
+  goTop() {
+    $('section').animate({ scrollTop: 0 }, 'slow');
+    return false;
+  }
+
   ngOnDestroy(): void {
      this.mobileQuery.removeListener(this._mobileQueryListener);
   }

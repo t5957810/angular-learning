@@ -1,0 +1,31 @@
+<h1>
+  動態載入表單
+</h1>
+
+<form [formGroup]="form">
+
+    <div *ngFor="let question of questionModel">
+      <label [for]="question.key">{{ question.label}}</label>
+
+      <div [ngSwitch]="question.controlType">
+        <mat-form-field *ngSwitchCase="'textbox'" >
+          <input matInput [formControlName]="question.key" [id]="question.key" [type]="textboxQuestion(question.key).type">
+
+          <mat-error *ngIf="getFormControl(question.key).invalid">
+              {{ question.label }} 資料有誤
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngSwitchCase="'dropdown'">
+          <mat-select  [formControlName]="question.key">
+          <mat-option *ngFor="let option of dropdownQuestion(question.key).options" [value]="option.key">
+            {{ option.value }}
+          </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <button mat-flat-button type="button" (click)="submitData()" [disabled]="form.invalid">送出</button>
+    <pre>{{ form.value | json }}</pre>
+  </form>
