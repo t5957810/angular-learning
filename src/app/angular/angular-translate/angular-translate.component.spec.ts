@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BasicComponent } from './basic.component';
+import { AngularTranslateComponent } from './angular-translate.component';
 
-xdescribe('BasicComponent', () => {
-  let component: BasicComponent;
-  let fixture: ComponentFixture<BasicComponent>;
+xdescribe('AngularTranslateComponent', () => {
+  let component: AngularTranslateComponent;
+  let fixture: ComponentFixture<AngularTranslateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BasicComponent ]
+      declarations: [ AngularTranslateComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BasicComponent);
+    fixture = TestBed.createComponent(AngularTranslateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -20,13 +20,13 @@
     <h4>如何新增環境變數?</h4>
     <p>例如要新增一個uat環境，在environments資料夾下新增environment.uat.ts，</p>
     <p>然後在angular.json中build找到configurations，加上：</p>
-    <pre>
-        "uat": {{'{'}}
+    <textarea highlight-js [options]="{}" [lang]="'json'">
+        "uat": {
           "fileReplacements": [
-          {{'{'}}
+            {
               "replace": "src/environments/environment.ts",
               "with": "src/environments/environment.uat.ts"
-          {{'}'}}
+            }
           ],
           "optimization": true,
           "outputHashing": "all",
@@ -37,14 +37,19 @@
           "extractLicenses": true,
           "vendorChunk": false,
           "buildOptimizer": true
-      {{'}'}}
-    </pre>
+      }
+    </textarea>
     <p>如果想在ng serve啟動時測試，在angular.json中serve底下的configurations也要新增：</p>
-    <pre>
-        "uat": {{'{'}}
-          "browserTarget": "angular-learning:build:uat"
-          {{'}'}}
-    </pre>
+    <textarea highlight-js [options]="{tabReplace: '    '}" [lang]="'json'">
+        "configurations": {
+          "production": {
+            "browserTarget": "angular-learning:build:production"
+          },
+          "uat": {
+            "browserTarget": "angular-learning:build:uat"
+          }
+      }
+    </textarea>
     <p>目前環境變數：{{ environmentName }}</p>
     <hr>
     <img style="max-width: 850px;" responsive-img src="assets/images/angular-basic/a1.png" />
@@ -100,48 +105,56 @@
 <h2>Angular component之間的溝通方式@Input/@Output</h2>
 <h4>父Component 傳資料給子Component</h4>
 <p>傳入屬性，兒子接值的ts用@input</p>
-< app-兒子 [data]="父的data">
-<p>兒子ts:
-@Input() data;</p>
-
+<textarea highlight-js [options]="{}" [lang]="'typescript'">
+    <app-兒子 [data]="父的data">
+</textarea>
+<p>兒子ts:</p>
+<textarea highlight-js [options]="{}" [lang]="'typescript'">
+    @Input() data;
+</textarea>
 <hr>
 <p>Demo：</p>
 <h4>以下藍色部分為兒子app-angular-detail component：</h4>
 <p>將陣列資料傳入在兒子app-angular-detail，使用ngFor跑出資料，點擊按鈕後回傳給父angular-basic選擇的值。</p>
 <app-angular-detail (chooseValue)="doChoose($event)" [data]="fatherArray"></app-angular-detail>
 <h4>兒子app-angular-detail的html(接收來自父的資料，並使用emit將事件發射給父component)：</h4>
-< button mat-raised-button color="accent" *ngFor="let item of data" (click)="chooseValue.emit(item)">  item.name  < /button>
-<h4>兒子app-angular-detail的ts：</h4>
-<pre>
-  @Input() data;
-  @Output() chooseValue = new EventEmitter{{ '<' }}any{{'>'}}();
+<textarea highlight-js [options]="{}" [lang]="'typescript'">
+  <button mat-raised-button color="accent" *ngFor="let item of data" (click)="chooseValue.emit(item)"> item.name  </button>
+</textarea>
 
-</pre>
+<h4>兒子app-angular-detail的ts：</h4>
+<textarea highlight-js [options]="{}" [lang]="'typescript'">
+  @Input() data;
+  @Output() chooseValue = new EventEmitter<any>();
+</textarea>
 
 <h4>父angular-basic 的html(將兒子寫上去)：</h4>
-{{ '<' }}app-angular-detail (chooseValue)="doChoose($event)" [data]="fatherArray" {{'>'}}{{ '<' }}/app-angular-detail{{'>'}}
-<h4>父angular-basic 的ts：</h4>
-<pre>
-fatherArray = [
-{{ '{' }}id: 1, name: '園丁'{{ '}' }},
-{{ '{' }}id: 2, name: '律師'{{ '}' }},
-{{ '{' }}id: 3, name: '祭司'{{ '}' }},
-{{ '{' }}id: 4, name: '盲女'{{ '}' }},
-{{ '{' }}id: 5, name: '前鋒'{{ '}' }},
-{{ '{' }}id: 6, name: '傭兵'{{ '}' }},
-{{ '{' }}id: 7, name: '空軍'{{ '}' }},
-{{ '{' }}id: 8, name: '魔術師'{{ '}' }},
-{{ '{' }}id: 9, name: '冒險家'{{ '}' }},
-{{ '{' }}id: 10, name: '機械師'{{ '}' }},
-{{ '{' }}id: 11, name: '慈善家'{{ '}' }},
-{{ '{' }}id: 12, name: '醫生'{{ '}' }},
-{{ '{' }}id: 13, name: '幸運兒'{{ '}' }}
-];
+<textarea highlight-js [options]="{}" [lang]="'typescript'">
+    <app-angular-detail (chooseValue)="doChoose($event)" [data]="fatherArray"></app-angular-detail>
+</textarea>
 
-doChoose($event) {{ '{' }}
-  this.openSnackBar($event.name);
-{{ '}' }}
-</pre>
+<h4>父angular-basic 的ts：</h4>
+<textarea highlight-js [options]="{}" [lang]="'typescript'">
+    fatherArray = [
+    {id: 1, name: '園丁'},
+    {id: 2, name: '律師'},
+    {id: 3, name: '祭司'},
+    {id: 4, name: '盲女'},
+    {id: 5, name: '前鋒'},
+    {id: 6, name: '傭兵'},
+    {id: 7, name: '空軍'},
+    {id: 8, name: '魔術師'},
+    {id: 9, name: '冒險家'},
+    {id: 10, name: '機械師'},
+    {id: 11, name: '慈善家'},
+    {id: 12, name: '醫生'},
+    {id: 13, name: '幸運兒'}
+  ];
+
+  doChoose($event) {
+    this.openSnackBar($event.name);
+  }
+</textarea>
 
 <h1>生命週期</h1>
 <img style="max-width: 850px;" responsive-img src="assets/images/angular-basic/a4.png" />

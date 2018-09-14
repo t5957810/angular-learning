@@ -1,0 +1,16 @@
+<h1>多語系</h1>
+<h2>使用ngx-translate</h2>
+<p>安裝：</p>
+<p>npm install @ngx-translate/core --save</p>
+<p>npm install @ngx-translate/http-loader --save</p>
+<hr>
+<img style="max-width: 850px;" responsive-img src="assets/images/angular-translate/a11.png" />
+<img style="max-width: 850px;" responsive-img src="assets/images/angular-translate/a12.png" />
+<img style="max-width: 850px;" responsive-img src="assets/images/angular-translate/a13.png" />
+<hr>
+<h4>在樣板中使用</h4>
+
+{{ 'title' | translate }}
+{{ name | translate }}
+<button mat-raised-button (click)="translate()" color="warn">切換語系</button>
+

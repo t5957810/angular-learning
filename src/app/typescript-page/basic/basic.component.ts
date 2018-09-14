@@ -20,6 +20,8 @@ export class BasicComponent implements OnInit {
       console.log(key);
     });
 
+
+
     $.each( obj, function( key, value ) {
       console.log('在Angular中測試使用jQuery：', key + ': ' + value );
     });

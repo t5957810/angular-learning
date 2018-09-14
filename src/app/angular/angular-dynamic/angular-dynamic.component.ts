@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ComponentFactoryResolver } from '@angular/core';
 import { AdHostDirective } from './ad-host.directive';
 import { DynamicAdComponent } from './dynamic-ad/dynamic-ad.component';
+import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 
 @Component({
   selector: 'app-angular-dynamic',
@@ -9,6 +10,7 @@ import { DynamicAdComponent } from './dynamic-ad/dynamic-ad.component';
 })
 export class AngularDynamicComponent implements OnInit {
   dynamicAdComponent = DynamicAdComponent;
+
   isLoad = false;
   @ViewChild(AdHostDirective) appAdHost: AdHostDirective;
   fatherArray = [
@@ -26,8 +28,21 @@ export class AngularDynamicComponent implements OnInit {
     {id: 12, name: '醫生'},
     {id: 13, name: '幸運兒'}
   ];
-  constructor( private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private scrollToService: ScrollToService
+  ) { }
 
+
+  // public  triggerScrollTo() {
+  //   console.log('scroll')
+  //   const config: ScrollToConfigOptions = {
+  //     easing: 'easeOutElastic',
+  //     duration: 1000,
+  //     target: 'destination'
+  //   };
+  //   this.scrollToService.scrollTo(config);
+  // }
   ngOnInit() {
 
   }
@@ -40,6 +55,8 @@ export class AngularDynamicComponent implements OnInit {
     (<DynamicAdComponent>componentRef.instance).data = this.fatherArray;
     this.isLoad = true;
   }
+
+
 
 }
 

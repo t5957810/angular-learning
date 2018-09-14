@@ -1,0 +1,222 @@
+
+<ul>
+  <li>
+    <p>Observable：</p>
+    <p>可觀察的物件，代表未來即將產生的事件資料(被觀察的物件)</p>
+  </li>
+  <li>
+    <p>Observer：</p>
+    <p>觀察者物件，用來接收觀察結果的物件，收到的就是事件資料(收到Observable)</p>
+    <p>Observer就是包含3個含有回呼函式的屬性(next, error, complete)</p>
+  </li>
+</ul>
+
+<h4>import：</h4>
+<p>import {{'{'}} fromEvent {{'}'}} from 'rxjs';        // 建立Observable的都是從rxjs載入</p>
+<p>import {{'{'}} filter {{'}'}} from 'rxjs/operators'; // 在pipe裡用的運算子從這載入</p>
+
+<h2>基本寫法：</h2>
+<p>建立Observable：</p>
+<textarea highlight-js [options]="{}" [lang]="'typescript'">
+    const click$ = fromEvent(document, 'click');
+</textarea>
+<p>建立 Observer：</p>
+<textarea highlight-js [options]="{}" [lang]="'typescript'">
+    const observer = {
+      next: (event) => { console.log('click!', event);
+      }
+    };
+</textarea>
+<p>建立訂閱：</p>
+<textarea highlight-js [options]="{}" [lang]="'typescript'">
+    const sub = click$.subscribe(observer);
+</textarea>
+
+<h2>常用簡化寫法(省略建立 Observer)：</h2>
+<p>建立Observable：</p>
+<textarea highlight-js [options]="{}" [lang]="'typescript'">
+    const click$ = fromEvent(document, 'click');
+</textarea>
+<p>建立訂閱：</p>
+<textarea highlight-js [options]="{}" [lang]="'typescript'">
+    const sub = click$.subscribe(
+      event => {
+        console.log('click!', event);
+      }
+    );
+</textarea>
+
+
+<h2>使用Operators：</h2>
+<textarea highlight-js [options]="{}" [lang]="'typescript'">
+    const click$ = fromEvent(document, 'click');
+    const sub = click$.pipe(
+      filter(
+        (event: MouseEvent) => {
+          if (  event.clientX < 100 && event.clientY > 100) {
+            return true;
+          } else if ( event.clientY < 100 ) {
+            return false;
+          }
+        })
+    ).subscribe(
+      (event: MouseEvent) => {
+          console.log('click!', event);
+      }
+    );
+
+</textarea>
+
+<ul>
+    <li>
+        <p>range：</p>
+        <p>類似跑for迴圈</p>
+        <textarea highlight-js [options]="{}" [lang]="'typescript'">
+            const numbers = range(1, 10);
+        </textarea>
+    </li>
+    <li>
+        <p>delay：</p>
+        <p>延遲n秒</p>
+        <textarea highlight-js [options]="{}" [lang]="'typescript'">
+            const clicks = fromEvent(document, 'click');
+const delayedClicks = clicks.pipe(delay(1000)); // each click emitted after 1 second
+delayedClicks.subscribe(x => console.log(x));
+        </textarea>
+    </li>
+    <li>
+        <p>timer：</p>
+        <p>n秒後執行一次</p>
+        <textarea highlight-js [options]="{}" [lang]="'typescript'">
+            const numbers = timer(5000);
+            numbers.subscribe(x => console.log(x));
+        </textarea>
+    </li>
+    <li>
+        <p>interval：</p>
+        <p>每n秒執行</p>
+        <textarea highlight-js [options]="{}" [lang]="'typescript'">
+            const numbers = interval(1000);
+numbers.subscribe(x => console.log(x));
+        </textarea>
+    </li>
+    <li>
+        <p>take：</p>
+        <p>只拿出前幾筆資料</p>
+        <textarea highlight-js [options]="{}" [lang]="'typescript'">
+            const interval = interval(1000);
+const five = interval.pipe(take(5));
+five.subscribe(x => console.log(x));
+        </textarea>
+    </li>
+    <li>
+        <p>of：</p>
+        <p>回傳假的資料</p>
+        <textarea highlight-js [options]="{}" [lang]="'typescript'">
+            const interval = of(10, 20, 30);
+        </textarea>
+    </li>
+    <li>
+      <p>concat：</p>
+      <p>第一個Observable結束後才會執行下一個</p>
+      <textarea highlight-js [options]="{}" [lang]="'typescript'">
+            const timer = interval(1000).pipe(take(4));
+          const sequence = range(1, 10);
+          const result = concat(timer, sequence);
+          result.subscribe(x => console.log(x));
+      </textarea>
+    </li>
+    <li>
+      <p>merge：</p>
+      <p>合併時順序不重要的情況下使用</p>
+      <textarea highlight-js [options]="{}" [lang]="'typescript'">
+            const clicks = fromEvent(document, 'click');
+          const timer = interval(1000);
+          const clicksOrTimer = merge(clicks, timer);
+          clicksOrTimer.subscribe(x => console.log(x));
+      </textarea>
+    </li>
+    <li>
+        <p>map：</p>
+        <p>將取得資料轉成另一種格式，例如回傳的資料是巢狀結構時，只想取得裡面某個資料</p>
+        <textarea highlight-js [options]="{}" [lang]="'typescript'">
+            this.layoutService.getTaipeiApiData()
+    .pipe( map( (data: any) =>
+      data.result.results
+    ))
+    .subscribe( data => {
+      console.log('直接拿到下層的資料= ', data);
+    });
+        </textarea>
+    </li>
+    <li>
+        <p>switchMap：</p>
+        <p>變更發生時立刻送出請求</p>
+        <button mat-raised-button (click)="navigateToDetail()" color="warn">switchMap</button>
+        <textarea highlight-js [options]="{}" [lang]="'typescript'">
+
+        </textarea>
+    </li>
+    <li>
+        <p>concatMap：</p>
+        <p></p>
+        <mat-form-field>
+            <input matInput #filterInput="ngModel" ngModel >
+        </mat-form-field>
+
+        <textarea highlight-js [options]="{}" [lang]="'typescript'">
+
+        </textarea>
+    </li>
+    <li>
+        <p>使用AsyncPipe：</p>
+        <p>減少subscribe的次數，不用在subscribe後指定資料</p>
+        <p red>注意! 如果在template上沒有使用到 | async，那就不會有自動幫你subscribe的效果</p>
+        <textarea highlight-js [options]="{}" [lang]="'typescript'">
+            asyncList$: Observable<any>;
+            this.asyncList$ = this.layoutService.getTaipeiApiData()
+    .pipe( map( (data: any) =>
+      data.result.results
+    ));
+
+          <p *ngFor="let item of asyncList$ | async"> item['段、號及其他註明'] </p>
+        </textarea>
+        <h4>結果：</h4>
+        <p *ngFor="let item of asyncList$ | async">{{ item['段、號及其他註明'] }}</p>
+    </li>
+    <li>
+        <p>share：</p>
+        <p>當不同Observable訂閱同個Observable送出http時，會發數次</p>
+        <textarea highlight-js [options]="{}" [lang]="'typescript'">
+            this.asyncList$ = this.layoutService.getTaipeiApiData()
+    .pipe( map( (data: any) =>
+      data.result.results
+    ));
+
+    // 找出中山南路的資料
+    this.street1$ = this.asyncList$
+    .pipe( map(
+      list => list.filter( data => data['路名'] === '中山南路' )
+    ));
+
+    // 找出信義路的資料
+    this.street2$ = this.asyncList$
+    .pipe( map(
+      list => list.filter( data => data['路名'] === '信義路' )
+    ));
+        </textarea>
+        <img style="max-width: 850px;" responsive-img src="assets/images/angular-rxjs/r1.png" />
+        <p>使用share就可以用同一份結果。</p>
+        <h4>中山南路的資料</h4>
+        <p *ngFor="let item of street1$ | async">
+          {{  item['段、號及其他註明'] }} -
+          {{  item['路名'] }}
+        </p>
+        <h4>信義路的資料</h4>
+        <p *ngFor="let item of street2$ | async">
+            {{  item['段、號及其他註明'] }} -
+            {{  item['路名'] }}
+          </p>
+    </li>
+</ul>
+

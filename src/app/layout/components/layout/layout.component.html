@@ -1,5 +1,5 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
-    <mat-toolbar color="primary" class="example-toolbar">
+  <mat-toolbar color="primary" class="example-toolbar">
       <mat-toolbar-row>
           <button class="hamburger mat-button" mat-button="" (click)="snav.toggle()">
             <span class="mat-button-wrapper">
@@ -9,7 +9,7 @@
             <div class="mat-button-ripple mat-ripple" matripple=""></div>
             <div class="mat-button-focus-overlay"></div>
           </button>
-          <a class="nav-link home" [routerLink]="['/']">
+          <a class="nav-link home" style="padding: 11px;margin-top: 10px;" [routerLink]="['/']">
             <img alt="Home" height="40" src="assets/images/logos/logo-nav@2x.png" title="Home" width="150" class="ng-star-inserted">
           </a>
           <h1 class="example-app-name">Learning</h1>
@@ -24,7 +24,6 @@
           </a>
       </mat-toolbar-row>
     </mat-toolbar>
-
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0" >
         {{ mobileQuery.matches }}
         <!-- 左側選單 -->
@@ -52,14 +51,28 @@
                     <a mat-list-item microsoft-font [routerLink]="['/angular/advance']" >進階應用介紹</a>
                     <a mat-list-item microsoft-font [routerLink]="['/angular/dynamicComponent']" >動態載入元件</a>
                     <a mat-list-item microsoft-font [routerLink]="['/angular/dynamicForms']" >動態載入表單</a>
+                    <a mat-list-item microsoft-font [routerLink]="['/angular/translate']" >多語系</a>
+                    <a mat-list-item microsoft-font [routerLink]="['/angular/test']" >單元測試</a>
+                    <a mat-list-item microsoft-font [routerLink]="['/angular/rxjs']" >RxJS</a>
                 </mat-expansion-panel>
             </mat-nav-list>
+            <p padding>當前版本: 1.0</p>
         </mat-sidenav>
 
         <!-- 右側內容 -->
         <mat-sidenav-content>
             <section class="sidenav-content" >
+              <div id="destination" style ="visibility: hidden;">
+                You've reached your destination.
+              </div>
+              <!-- <button mat-raised-button *ngFor="let item of hccg">
+                  {{ item['監測站名(地點)'] }}
+              </button> -->
+
                 <router-outlet></router-outlet>
+                <button mat-fab class="gotop" (click)="triggerScrollTo()"><i class="material-icons">
+                  keyboard_arrow_up
+                  </i></button>
             </section>
              <!-- <button mat-flat-button color="warn" class="gotop" (click)="goTop()" appGoTop>Warn</button> -->
             <app-footer></app-footer>

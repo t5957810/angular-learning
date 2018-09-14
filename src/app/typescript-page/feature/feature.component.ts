@@ -9,7 +9,7 @@ export interface PeriodicElement {
 export class Greeter {
   greeting: string;       // 預設為公開屬性
   private title?: string; // 宣告為私有屬性
-  constructor(message:string, title:string) {
+  constructor(message: string, title: string) {
       this.greeting = message;
       this.title = title;
   }

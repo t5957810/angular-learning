@@ -7,6 +7,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class AngularAdvanceComponent implements OnInit {
   @ViewChild('btn') btn: ElementRef;
+
   constructor() { }
 
   ngOnInit() {
@@ -14,7 +15,7 @@ export class AngularAdvanceComponent implements OnInit {
   }
 
   getViewChild() {
-    console.log('btn = ', this.btn)
+    console.log('btn = ', this.btn);
   }
 
 }
